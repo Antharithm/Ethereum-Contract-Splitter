@@ -4,7 +4,7 @@ pragma solidity ^0.5.0;
 contract DeferredEquityPlan {
     address human_resources;
     
-    // replace fakeNow with all 'now' to fast fast forward time
+    // replace fakeNow with all 'now' to fast fast forward time during testing
     // uint fakeNow = now;
     
     // function fastForward() public {

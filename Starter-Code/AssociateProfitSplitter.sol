@@ -14,7 +14,7 @@ contract AssociateProfitSplitter {
         employee_two = _two;
         employee_three = _three;
     }
-    // Since we are only sending ETH to the employees, this contract function should always return "0" value.
+    // Since we are only sending ETH to the employees, this contract should not have ETH stored in it and the function should always return "0" as a value.
     function balance() public view returns(uint) {
         return address(this).balance;
     }

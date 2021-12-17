@@ -1,7 +1,9 @@
 pragma solidity ^0.5.0;
 
-// lvl 3: equity plan
+// Stock Equity Plan
+
 contract DeferredEquityPlan {
+
     address human_resources;
     
     // replace fakeNow with all 'now' to fast fast forward time during testing
@@ -11,23 +13,21 @@ contract DeferredEquityPlan {
     //    fakeNow += 100 days;
     //}
 
-    address payable employee; // bob
-    bool active = true; // this employee is active at the start of the contract
+    address payable employee; // Bob
+    bool active = true; // This employee is active at the start of the contract
 
-    // @TODO: Set the total shares and annual distribution
-    // Your code here!
+    // Set the total shares and annual distribution rate
     uint total_shares = 1000;
     
-    // set annual distribution share amount
+    // Annual distribution rate (amount of shares)
     uint annual_distribution = 250;
 
-    uint start_time = now; // permanently store the time this contract was initialized
+    uint start_time = now; // permanently stores the time that this contract was initialized
 
-    // @TODO: Set the `unlock_time` to be 365 days from now
-    // Your code here!
+    // Set the `unlock_time` to be 365 days from contract initialization
     uint unlock_time = now + 365 days;
     
-    // track how many vested shares the employee has clamied - it starts at 0
+    // Track how many vested shares the employee has clamied - they start with 0
     uint public distributed_shares;
 
     constructor(address payable _employee) public {
@@ -36,38 +36,38 @@ contract DeferredEquityPlan {
     }
 
     function distribute() public {
+    
         require(msg.sender == human_resources || msg.sender == employee, "You are not authorized to execute this contract.");
         require(active == true, "Contract is not active.");
 
-        // @TODO: Add "require" statements to enforce that:
+        // Added "require" statements to enforce the following:
         // 1: `unlock_time` is less than or equal to `now`
         // 2: `distributed_shares` is less than the `total_shares`
-        // Your code here!
+        
         require(unlock_time <= now, "Shares not yet vested");
-        require(distributed_shares <= total_shares, "Shares already distributed for this year");
+        require(distributed_shares <= total_shares, "Shares already distributed for this year!");
 
-        // @TODO: Add 365 days to the `unlock_time`
-        // Your code here!
+        // Add 365 days to the `unlock_time`
         unlock_time = unlock_time + 365 days;
 
-        // @TODO: Calculate the shares distributed by using the function (now - start_time) / 365 days * the annual distribution
-        // Make sure to include the parenthesis around (now - start_time) to get accurate results!
-        // Your code here!
+        // Calculate the shares distributed by using the function (now - start_time) / 365 days * the annual distribution amount.        
         distributed_shares = ((now - start_time) / 365 days) * annual_distribution;
 
-        // double check in case the employee does not cash out until after 5+ years
+        // Make sure the employee can not cash out until after 5+ years.
         if (distributed_shares > 1000) {
             distributed_shares = 1000;
         }
     }
 
-    // human_resources and the employee can deactivate this contract at-will
+    // human_resources and the employee can deactivate this contract at will
+    
     function deactivate() public {
         require(msg.sender == human_resources || msg.sender == employee, "You are not authorized to deactivate this contract.");
         active = false;
     }
 
-    // Since we do not need to handle Ether in this contract, revert any Ether sent to the contract directly
+    // Since we are not handling Ether in this contract, revert any ETH sent to this contract.
+    
     function() external payable {
         revert("Do not send Ether to this contract!");
     }

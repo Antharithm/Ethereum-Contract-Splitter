@@ -5,7 +5,6 @@ contract DeferredEquityPlan {
 
     address human_resources;
     
-    // replace fakeNow with all 'now' to fast fast forward time during testing
     // uint fakeNow = now;
     // function fastForward() public {
     //    fakeNow += 365 days;

@@ -1,4 +1,4 @@
-# Unit 20 - "Smart Contract Payment Systems"
+# "Smart Contract Payment Systems"
 
 ![contract](Images/smart-contract.png)
 

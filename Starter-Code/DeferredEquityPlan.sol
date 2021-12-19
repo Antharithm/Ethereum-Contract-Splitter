@@ -8,7 +8,7 @@ contract DeferredEquityPlan {
     // replace fakeNow with all 'now' to fast fast forward time during testing
     // uint fakeNow = now;
     // function fastForward() public {
-    //    fakeNow += 100 days;
+    //    fakeNow += 365 days;
     //}
 
     address payable employee; // Bob
